@@ -30,7 +30,7 @@ $(function() {
                 expect(allFeeds[prop].url).toBeDefined();
                 expect(allFeeds[prop].url).not.toBe('');
             }
-        })
+        });
 
 
         /* Test that loops through each feed
@@ -42,7 +42,7 @@ $(function() {
                 expect(allFeeds[prop].name).toBeDefined();
                 expect(allFeeds[prop].name).not.toBe('');
             }
-        })
+        });
     });
 
 
@@ -53,18 +53,18 @@ $(function() {
          */
         it('is hidden by default', function() {
             expect($('body').hasClass('menu-hidden')).toBe(true);
-        })
+        });
 
         /* Test that ensures the menu changes
           * visibility when the menu icon is clicked; does the menu display when
           * clicked and does it hide when clicked again.
           */
         it('changes visibility when clicked', function() {
-            $('.menu-icon-link').click()
+            $('.menu-icon-link').click();
             expect(document.body.className).not.toBe('menu-hidden');
-            $('.menu-icon-link').click()
+            $('.menu-icon-link').click();
             expect(document.body.className).toBe('menu-hidden');
-        })
+        });
     });
         
    
@@ -84,7 +84,7 @@ $(function() {
         it('contains at least 1 entry', function(done){
             expect($('.feed').children()).toBeDefined();
             done();
-        })
+        });
     });
 
     /*Test suite to check that new feeds loads properly */
