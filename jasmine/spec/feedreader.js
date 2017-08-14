@@ -80,7 +80,7 @@ $(function() {
          * a single .entry element within the .feed container.
          */
         it('contains at least 1 entry', function(done){
-            expect($('.feed .entry-link').length).toBeGreaterThan(0);
+            expect($('.feed .entry').length).toBeGreaterThan(0);
             done();
         });
     });
