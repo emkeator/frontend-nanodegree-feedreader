@@ -61,9 +61,9 @@ $(function() {
           */
         it('changes visibility when clicked', function() {
             $('.menu-icon-link').click();
-            expect(document.body.className).not.toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBeFalsy();
             $('.menu-icon-link').click();
-            expect(document.body.className).toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBeTruthy();
         });
     });
         
@@ -72,9 +72,7 @@ $(function() {
     describe('Initial Entries', function(){
         /*Ensures asynchronous calls load before test*/
         beforeEach(function(done){
-            loadFeed(0, function() {
-                done();
-            });
+            loadFeed(0, done);
         });
 
         /* Test that ensures when the loadFeed
@@ -82,7 +80,7 @@ $(function() {
          * a single .entry element within the .feed container.
          */
         it('contains at least 1 entry', function(done){
-            expect($('.feed').children()).toBeDefined();
+            expect($('.feed .entry-link').length).toBeGreaterThan(0);
             done();
         });
     });
@@ -93,17 +91,21 @@ $(function() {
 
         beforeEach(function(done){
             loadFeed(1, function() {
+                contentOfOldFeed = $('.feed').html();
                 done();
             });
-            contentOfOldFeed = $('.feed').html();
         });
         /* Test that ensures when each new feed is loaded
          * by the loadFeed function that the content actually changes.
          */
         it('changes content for new feed', function(done){
-            loadFeed(0);
-            expect($('.feed').html()).not.toEqual(contentOfOldFeed);
-            done();
+            
+            let contentOfNewFeed;
+            loadFeed(0, function() {
+                contentOfNewFeed = $('.feed').html();
+                expect(contentOfNewFeed).not.toEqual(contentOfOldFeed);
+                done();
+            });
         });
     
     });
